@@ -5,8 +5,8 @@ html, body {
     height: 100%;
   }
   
-  /* Le conteneur de la carte occupe 100% de la largeur et de la hauteur du viewport */
+  /* Le conteneur de la carte occupe 70% de la largeur et 100% de la hauteur du viewport */
   #map {
-    width: 100vw;
+    width: 70vw;
     height: 100vh;
   }
