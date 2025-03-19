@@ -1,12 +1,25 @@
-/* Supprimer les marges et les paddings par défaut et occuper toute la hauteur */
+/* Réinitialisation des marges et paddings, et occupation de toute la hauteur */
 html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-  }
-  
-  /* Le conteneur de la carte occupe 100% de la largeur et de la hauteur du viewport */
-  #map {
-    width: 100vw;
-    height: 100vh;
-  }
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* Le conteneur de la carte occupe 100% de la largeur et de la hauteur du viewport */
+#map {
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Styles pour les départements */
+.departements path {
+  fill: #FFFFFF;
+  stroke: #3388FF;
+  stroke-width: 1;
+  transition: fill 0.3s;
+}
+
+.departements path:hover {
+  fill: #00aaff; /* Couleur de surbrillance au survol */
+  cursor: pointer;
+}
