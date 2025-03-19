@@ -14,11 +14,11 @@ console.log(getCurrentTime());
 const cities = [
     { name: "Nantes", lat: 47.2173, lon: -1.5534 },
     { name: "Angers", lat: 47.4698, lon: -0.5593 },
-    { name: "Ancenis", lat: 47.3667, lon: -1.1667 },
-    { name: "Saint-Nazaire", lat: 47.2833, lon: -2.2 },
+    { name: "Ancenis", lat: 47.3667, lon: -1.1767 },
+    { name: "Saint-Nazaire", lat: 47.2733, lon: -2.22 },
     { name: "Challans", lat: 46.85, lon: -1.8833 },
     { name: "La Roche-sur-Yon", lat: 46.6667, lon: -1.4333 },
-    { name: "Montaigu", lat: 46.9833, lon: -1.3167 },
+    { name: "Montaigu", lat: 46.9733, lon: -1.3167 },
     { name: "Pontchâteau", lat: 47.435, lon: -2.089 },
     { name: "Blain", lat: 47.476, lon: -1.762 },
     { name: "Château Gontier", lat: 47.833, lon: -0.7 },
@@ -26,9 +26,9 @@ const cities = [
     { name: "Mayenne", lat: 48.3, lon: -0.6167 },
     { name: "Le Mans", lat: 48, lon: 0.2 },
     { name: "La Flèche", lat: 47.7, lon: -0.0833 },
-    { name: "Doué-la-Fontaine", lat: 47.2, lon: -0.28 },
+    { name: "Doué-la-Fontaine", lat: 47.19, lon: -0.28 },
     { name: "Trelazé", lat: 47.45, lon: -0.4667 },
-    { name: "Les Sables-d'Olonne", lat: 46.295, lon: -1.4659 },
+    { name: "Les Sables-d'Olonne", lat: 46.5029, lon: -1.785493 },
     { name: "La Tranche-sur-mer", lat: 46.343, lon: -1.4391 }
 ];
 
