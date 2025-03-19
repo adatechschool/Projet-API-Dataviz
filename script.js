@@ -14,8 +14,12 @@ async function fetchTideExtremes() {
     return;
   }
 
-  const start = "2025-03-19T00:00:00Z";
-  const end = "2025-03-26T00:00:00Z";
+  const now = new Date();
+  const start = now.toISOString().split(".")[0] + "Z";
+  const end =
+    new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000)
+      .toISOString()
+      .split(".")[0] + "Z";
 
   for (const city of cities) {
     const url = `https://api.stormglass.io/v2/tide/extremes/point?lat=${
@@ -84,5 +88,5 @@ function displayTideData(data) {
     });
   });
 }
-localStorage.clear();
+
 fetchTideExtremes();
