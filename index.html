@@ -12,14 +12,62 @@
 
 </head>
 <body>
+    <h1>Bienvenue en Pays de La Loire</h1>
+
+    <div id="date_heure">Nous sommes le ? et il est ? heures</div>
+    <div id="horraire_du_soleil">Le soleil se lève à ? et se couche à ?</div>
+    <div id="departements">Loire-Atlantique (44), Maine-et-Loire (49), Mayenne (53), Sarthe (72), Vendée (85)</div>
 
     <div id="map"></div>
 
-    <div id="meteo_container">
+<!--Menu à droite-->
+    <div id="choix"></div>
+    <ul>
+        <li>
+            <input type="radio" id="Meteo"/>
+            <label for="Meteo">Météo</label>
+        </li>
+    
+        <ul>
+            <li>
+                <input type="radio" id="Temperature"/>
+                <label for="Temperature">Température</label>
+            </li>
+            <li>
+                <input type="radio" id="vent"/>
+                <label for="vent">Vitesse du vent</label>
+            </li>
+            <li>
+                <input type="radio" id="humidite"/>
+                <label for="humidite">Humidité</label>
+            </li>
+            <li>
+                <input type="radio" id="Temps"/>
+                <label for="Temps">Temps</label>
+            </li>
+        </ul>
+    
+        <li>
+            <input type="radio" id="Marees"/>
+            <label for="Marees">Horaires des Marées</label>
+            (Marée haute à ? et marée basse à ?)
+        </li>
+
+        <li>
+            <input type="radio" id="Pollution"/>
+            <label for="Pollution">Pollution de l'air</label>
+        </li>
+
+        <li>
+            <input type="radio" id="Pollens"/>
+            <label for="Pollens">Pollens</label>
+        </li>
+    </ul>
+  <!-- <div id="meteo_container">
         <p id="temperature"></p>
         <p id="wind"></p>
         <p id="conditions_meteo"></p>
-    </div>
+    </div> -->
 
  <!-- Inclusion du JS de Leaflet et du fichier JS local -->
  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
