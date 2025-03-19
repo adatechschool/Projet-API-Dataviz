@@ -1,0 +1,12 @@
+/* Supprimer les marges et les paddings par défaut et occuper toute la hauteur */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  
+  /* Le conteneur de la carte occupe 70% de la largeur et 100% de la hauteur du viewport */
+  #map {
+    width: 70vw;
+    height: 100vh;
+  }
