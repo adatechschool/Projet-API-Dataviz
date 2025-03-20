@@ -1,17 +1,41 @@
-/* Réinitialisation des marges et paddings, et occupation de toute la hauteur */
+/* Réinitialisation des marges, paddings et hauteur */
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
 }
 
-/* Le conteneur de la carte occupe 100% de la largeur et de la hauteur du viewport */
-#map {
-  width: 100vw;
-  height: 100vh;
+/* Style de l'en-tête : centré, avec un fond blanc et une bordure bleue en bas */
+#header {
+  background: #fff;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #3388FF; /* Bordure bleue */
+  position: relative;
+  z-index: 1000;
 }
 
-/* Styles pour les départements */
+/* Style pour le titre de l'en-tête */
+#header h1 {
+  margin-top: 0; /* Pas de marge supérieure */
+  margin-bottom: 10px; /* Marge inférieure de 10px */
+}
+
+/* Style pour les paragraphes de l'en-tête */
+#header p {
+  margin-top: 10px; /* Marge supérieure de 10px */
+  margin-bottom: 10px; /* Pas de marge inférieure */
+}
+
+/* Style du conteneur de la carte.
+   On retire la hauteur de l'en-tête pour que la carte occupe le reste de la fenêtre */
+#map {
+  width: 100vw;
+  height: calc(100vh - 100px); /* Ajustez cette valeur selon la hauteur réelle de votre header */
+}
+
+/* (Optionnel) Styles pour les éléments SVG des départements s'ils sont affichés dans un calque */
 .departements path {
   fill: #FFFFFF;
   stroke: #3388FF;

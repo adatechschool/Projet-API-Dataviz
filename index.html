@@ -1,79 +1,42 @@
 <!DOCTYPE html>
 
 <html lang="fr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carte des Pays de la Loire</title>
-    <script src="script.js" defer></script>
-    
-     <!-- Lien vers le fichier CSS local et le CSS de Leaflet -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Carte des Pays de la Loire - Masquage extérieur</title>
+  <!-- Lien vers le fichier CSS local et le CSS de Leaflet -->
+
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 
 </head>
+
 <body>
+
+  <!-- En-tête contenant les informations -->
+  <header id="header">
+
     <h1>Bienvenue en Pays de La Loire</h1>
+    <p id="date_heure">Nous sommes le jeudi 20 mars 2025 et il est 11:06:18</p>
+    <p id="horraire_du_soleil">Le soleil se lève à ? et se couche à ?</p>
+    </p>
 
-    <div id="date_heure">Chargement...</div>
-    <div id="horraire_du_soleil">Le soleil se lève à ? et se couche à ?</div>
-    <div id="departements">Loire-Atlantique (44), Maine-et-Loire (49), Mayenne (53), Sarthe (72), Vendée (85)</div>
+  </header>
 
-    <div id="map"></div>
+  <!-- Conteneur de la carte -->
+  <div id="map"></div>
 
-<!--Menu à droite-->
-    <div id="choix"></div>
-    <ul>
-        <li>
-            <input type="radio" id="Meteo"/>
-            <label for="Meteo">Météo</label>
-        </li>
-    
-        <ul>
-            <li>
-                <input type="radio" id="Temperature"/>
-                <label for="Temperature">Température</label>
-            </li>
-            <li>
-                <input type="radio" id="vent"/>
-                <label for="vent">Vitesse du vent</label>
-            </li>
-            <li>
-                <input type="radio" id="humidite"/>
-                <label for="humidite">Humidité</label>
-            </li>
-            <li>
-                <input type="radio" id="Temps"/>
-                <label for="Temps">Temps</label>
-            </li>
-        </ul>
-    
-        <li>
-            <input type="radio" id="Marees"/>
-            <label for="Marees">Horaires des Marées</label>
-            (Marée haute à ? et marée basse à ?)
-        </li>
-
-        <li>
-            <input type="radio" id="Pollution"/>
-            <label for="Pollution">Pollution de l'air</label>
-        </li>
-
-        <li>
-            <input type="radio" id="Pollens"/>
-            <label for="Pollens">Pollens</label>
-        </li>
-    </ul>
-  <!-- <div id="meteo_container">
-        <p id="temperature"></p>
-        <p id="wind"></p>
-        <p id="conditions_meteo"></p>
-    </div> -->
-
- <!-- Inclusion du JS de Leaflet et du fichier JS local -->
- <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-   <!-- Inclusion du plugin Leaflet.Mask -->
+  <!-- Inclusion du JS de Leaflet -->
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <!-- Inclusion du plugin Leaflet.Mask (assurez-vous que le chemin est correct) -->
   <script src="leaflet.mask.js"></script>
- 
+  <!-- Inclusion du fichier JavaScript local -->
+  <script src="script.js" defer></script>
+
 </body>
+
 </html>
