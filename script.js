@@ -3,12 +3,24 @@ const vent = document.getElementById("wind");
 const conditions = document.getElementById("conditions_meteo");
 const temp = document.getElementById("temperature");
 
-function getCurrentTime() {
-  const now = new Date();
-  return now.toLocaleTimeString();
+function updateDateTime() {
+    const now = new Date();
+
+    // Formatage de la date en français
+    const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const dateString = now.toLocaleDateString("fr-FR", optionsDate);
+
+    // Formatage de l'heure en français (HH:MM:SS)
+    const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+    const timeString = now.toLocaleTimeString("fr-FR", optionsTime);
+
+    // Mise à jour du DOM
+    document.getElementById("date_heure").textContent = `Nous sommes le ${dateString} et il est ${timeString}`;
 }
 
-console.log(getCurrentTime());
+// Mettre à jour l'heure toutes les secondes
+setInterval(updateDateTime, 1000);
+updateDateTime();
 
 // Liste des villes avec leurs coordonnées
 const cities = [
