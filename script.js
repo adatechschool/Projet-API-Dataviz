@@ -73,7 +73,7 @@ async function getWeatherForCities(cities) {
     try {
         console.log("Récupération des données depuis l'API...");
         const requests = cities.map(city =>
-            fetch(`https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lon}&current_weather=true`)
+            fetch(`https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lon}&current_weather=true&hourly=relative_humidity_2m`)
                 .then(response => {
                     if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
                     return response.json();
@@ -114,6 +114,7 @@ function displayWeather(results) {
         const temperature = data.current_weather.temperature;
         const windSpeed = data.current_weather.windspeed;
         const weatherCondition = weatherDescriptions[data.current_weather.weathercode] || "Inconnu";
+        const humidity = data.hourly.relative_humidity_2m[11];
 
         // Ajout du marqueur sur la carte
         L.marker([city.lat, city.lon])
@@ -122,7 +123,8 @@ function displayWeather(results) {
                 <b>${city.name}</b><br>
                 🌡 Température: ${temperature} °C<br>
                 💨 Vent: ${windSpeed} km/h<br>
-                ☁️ Conditions: ${weatherCondition}
+                ☁️ Conditions: ${weatherCondition}<br>
+                💧 Humidité : ${humidity} %
             `);
 
         // Mise à jour du conteneur HTML
