@@ -46,9 +46,8 @@ const cities = [
 ];
 
 // Initialisation de la carte centrée sur la région des Pays de la Loire
-const map = L.map("map", { zoomControl: false }).setView([47.5, -0.8], 8);
-map.doubleClickZoom.disable(); // Désactive le zoom par double-clic
-map.touchZoom.disable();       // Désactive le zoom tactile (pincement)
+const map = L.map("map", { zoom:8, minZoom:8, maxZoom:8 }).setView([47.5, -0.8], 8);
+map.zoomControl.remove();
 
 // Ajouter le fond de carte OpenStreetMap
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
