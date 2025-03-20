@@ -43,76 +43,87 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 
 // Fonction pour récupérer et afficher la météo des villes
 async function getWeatherForCities(cities) {
-  try {
-    for (const city of cities) {
-      const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lon}&current_weather=true`;
-      const response = await fetch(apiUrl);
+    const cacheKey = "weatherData";
+    const cacheDuration = 3600 * 1000; // 1 heure en millisecondes
+    const now = Date.now();
 
-      if (!response.ok) {
-        throw new Error(`Erreur HTTP : ${response.status}`);
-      }
-
-      const data = await response.json();
-
-      // Mapping des codes météo vers des descriptions compréhensibles
-      const weatherDescriptions = {
-        0: "Ciel dégagé",
-        1: "Principalement dégagé",
-        2: "Partiellement nuageux",
-        3: "Couvert",
-        45: "Brouillard",
-        48: "Brouillard givrant",
-        51: "Bruine légère",
-        53: "Bruine modérée",
-        55: "Bruine forte",
-        61: "Pluie faible",
-        63: "Pluie modérée",
-        65: "Pluie forte",
-        71: "Neige faible",
-        73: "Neige modérée",
-        75: "Neige forte",
-        80: "Averses légères",
-        81: "Averses modérées",
-        82: "Averses fortes",
-        95: "Orages",
-        96: "Orages avec grêle légère",
-        99: "Orages avec grêle forte",
-      };
-
-      const temperature = data.current_weather.temperature;
-      const windSpeed = data.current_weather.windspeed;
-      const weatherCondition =
-        weatherDescriptions[data.current_weather.weathercode] || "Inconnu";
-
-      // Ajouter un marqueur avec une popup météo pour chaque ville
-      L.marker([city.lat, city.lon])
-        .addTo(map)
-        .bindPopup(
-          `
-                    <b>${city.name}</b><br>
-                    🌡 Température: ${temperature} °C<br>
-                    💨 Vent: ${windSpeed} km/h<br>
-                    ☁️ Conditions: ${weatherCondition}
-                `
-        )
-        .openPopup(); // Optionnel : affiche directement la popup au chargement
-
-      // Mettre à jour le conteneur HTML pour afficher les données de la dernière ville
-      const meteoContainer = document.getElementById("meteo_container");
-      if (meteoContainer) {
-        meteoContainer.innerHTML += `
-                    <h3>${city.name}</h3>
-                    <p>🌡 Température: ${temperature} °C</p>
-                    <p>💨 Vent: ${windSpeed} km/h</p>
-                    <p>☁️ Conditions: ${weatherCondition}</p>
-                    <hr>
-                `;
-      }
+    // Récupération du cache s'il existe
+    let cachedData = localStorage.getItem(cacheKey);
+    if (cachedData) {
+        cachedData = JSON.parse(cachedData);
+        if (now - cachedData.timestamp < cacheDuration) {
+            console.log("Chargement des données depuis le cache...");
+            displayWeather(cachedData.data);
+            return;
+        }
     }
-  } catch (error) {
-    console.error("Erreur lors de la récupération des données météo :", error);
-    alert("Impossible de récupérer la météo. Vérifiez votre connexion.");
-  }
+
+    try {
+        console.log("Récupération des données depuis l'API...");
+        const requests = cities.map(city =>
+            fetch(`https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lon}&current_weather=true`)
+                .then(response => {
+                    if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
+                    return response.json();
+                })
+                .then(data => ({ city, data }))
+        );
+
+        const results = await Promise.all(requests);
+
+        // Stocker les nouvelles données en cache
+        localStorage.setItem(cacheKey, JSON.stringify({ timestamp: now, data: results }));
+
+        displayWeather(results);
+    } catch (error) {
+        console.error("Erreur lors de la récupération des données météo :", error);
+        alert("Impossible de récupérer la météo. Vérifiez votre connexion.");
+    }
+}
+
+// 🔹 Fonction pour afficher la météo (séparée pour réutilisation)
+function displayWeather(results) {
+    const weatherDescriptions = {
+        0: "Ciel dégagé", 1: "Principalement dégagé", 2: "Partiellement nuageux",
+        3: "Couvert", 45: "Brouillard", 48: "Brouillard givrant",
+        51: "Bruine légère", 53: "Bruine modérée", 55: "Bruine forte",
+        61: "Pluie faible", 63: "Pluie modérée", 65: "Pluie forte",
+        71: "Neige faible", 73: "Neige modérée", 75: "Neige forte",
+        80: "Averses légères", 81: "Averses modérées", 82: "Averses fortes",
+        95: "Orages", 96: "Orages avec grêle légère", 99: "Orages avec grêle forte",
+    };
+
+    const meteoContainer = document.getElementById("meteo_container");
+    if (meteoContainer) {
+        meteoContainer.innerHTML = ""; // Nettoyer avant d'ajouter les nouvelles données
+    }
+
+    results.forEach(({ city, data }) => {
+        const temperature = data.current_weather.temperature;
+        const windSpeed = data.current_weather.windspeed;
+        const weatherCondition = weatherDescriptions[data.current_weather.weathercode] || "Inconnu";
+
+        // Ajout du marqueur sur la carte
+        L.marker([city.lat, city.lon])
+            .addTo(map)
+            .bindPopup(`
+                <b>${city.name}</b><br>
+                🌡 Température: ${temperature} °C<br>
+                💨 Vent: ${windSpeed} km/h<br>
+                ☁️ Conditions: ${weatherCondition}
+            `);
+
+        // Mise à jour du conteneur HTML
+        if (meteoContainer) {
+            meteoContainer.innerHTML += `
+                <h3>${city.name}</h3>
+                <p>🌡 Température: ${temperature} °C</p>
+                <p>💨 Vent: ${windSpeed} km/h</p>
+                <p>☁️ Conditions: ${weatherCondition}</p>
+                <hr>
+            `;
+        }
+    });
 }
 
 // Appel de la fonction pour récupérer la météo de toutes les villes
@@ -222,7 +233,7 @@ function displayTideData(data) {
     affichageMarees.textContent += "\n";
   });
 }
-fetchTideExtremes();
+//fetchTideExtremes();
 
 // Ajout des tuiles OpenStreetMap
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
