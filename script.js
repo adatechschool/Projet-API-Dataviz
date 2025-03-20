@@ -137,7 +137,7 @@ window.addEventListener("resize", () => {
 const ville = [
   { name: "Saint-Nazaire", lat: 47.27, lng: -2.2 },
   { name: "Les Sables-d'Olonne", lat: 46.5, lng: -1.78 },
-  // { name: "Pornic", lat: 47.11, lng: -2.1 },
+  { name: "La Tranche-sur-mer", lat: 46.343, lon: -1.4391 },
 ];
 
 const affichageMarees = document.querySelector("#Marees");
