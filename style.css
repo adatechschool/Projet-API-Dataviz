@@ -29,8 +29,10 @@ html, body {
 }
 
 #infos{
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
+  justify-content : space-around;
+  align-items: center;
 }
 /* Style du conteneur de la carte.
    On retire la hauteur de l'en-tête pour que la carte occupe le reste de la fenêtre */
