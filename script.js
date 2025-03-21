@@ -401,7 +401,7 @@ const maskLayer = L.mask(null, {
   restrictBounds: true, // Restreint la navigation aux limites du masque
   color: "#3388FF", // Couleur de la bordure (bleu)
   weight: 2, // Épaisseur de la bordure
-  fillColor: "#FFFFFF", // Couleur de remplissage du masque (cachant l'extérieur)
+  fillColor: "#87CEEB", // Couleur de remplissage du masque (cachant l'extérieur)
   fillOpacity: 1, // Opacité complète pour masquer l'extérieur
 });
 
