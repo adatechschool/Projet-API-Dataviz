@@ -13,7 +13,6 @@ html, body {
   padding-bottom: 10px;
   border-bottom: 2px solid #3388FF; /* Bordure bleue */
   position: relative;
-  z-index: 1000;
 }
 
 /* Style pour le titre de l'en-tête */
@@ -38,7 +37,7 @@ html, body {
    On retire la hauteur de l'en-tête pour que la carte occupe le reste de la fenêtre */
 #map {
   width: 100vw;
-  height: calc(100vh - 100px); /* Ajustez cette valeur selon la hauteur réelle de votre header */
+  height: calc(100vh - 100px);/* Ajustez cette valeur selon la hauteur réelle de votre header */
 }
 
 /* (Optionnel) Styles pour les éléments SVG des départements s'ils sont affichés dans un calque */
