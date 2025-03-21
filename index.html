@@ -26,9 +26,24 @@
       </div>
     </header>
 
-    <!-- Conteneur de la carte -->
-    <div id="map"></div>
+    <div id="conteneur">
+      <!-- Conteneur de la carte -->
+      <div id="map"></div>
+      </main>
 
+      <!--menu déroulant-->
+      <aside>
+        <details class="dropdown" id="maree">
+            <summary role="button">
+            <a class="button">Horaires des Marées</a>
+            </summary>
+            <ul>
+            <li><a href="#">Marée haute</a></li>
+            <li><a href="#">Marée basse</a></li>
+        </ul>
+        </details>
+      </aside>  
+    </div>
     <!-- Inclusion du JS de Leaflet -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <!-- Inclusion du plugin Leaflet.Mask (assurez-vous que le chemin est correct) -->
