@@ -53,7 +53,10 @@ const cities = [
 ];
 
 // Initialisation de la carte centrée sur la région des Pays de la Loire
-const map = L.map("map", { zoom:8, minZoom:8, maxZoom:8 }).setView([47.3, -0.8], 8);
+const map = L.map("map", { zoom: 8, minZoom: 8, maxZoom: 8 }).setView(
+  [42.3, -0.8],
+  8
+);
 map.zoomControl.remove();
 
 map.dragging.disable();
@@ -74,23 +77,28 @@ async function getWeatherForCities(cities) {
   if (cachedData) {
     cachedData = JSON.parse(cachedData);
     if (now - cachedData.timestamp < cacheDuration) {
-      console.log("Chargement des données depuis le cache...");
+      console.log("Chargement des données depuis le cache...", cachedData.data);
       displayWeather(cachedData.data);
+      displaySunTimes(cachedData.data[0].data); // Affiche les données globales depuis le cache
       return;
     }
   }
 
   try {
     console.log("Récupération des données depuis l'API...");
+    const today = new Date().toISOString().split("T")[0]; // ex: "2025-03-21"
     const requests = cities.map((city) =>
       fetch(
-        `https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lon}&current_weather=true&hourly=relative_humidity_2m`
+        `https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lon}&current_weather=true&hourly=relative_humidity_2m&daily=sunrise,sunset&timezone=Europe/Paris&start=${today}&end=${today}`
       )
         .then((response) => {
           if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
           return response.json();
         })
-        .then((data) => ({ city, data }))
+        .then((data) => {
+          console.log(`Réponse pour ${city.name}:`, data);
+          return { city, data };
+        })
     );
 
     const results = await Promise.all(requests);
@@ -102,6 +110,7 @@ async function getWeatherForCities(cities) {
     );
 
     displayWeather(results);
+    displaySunTimes(results[0].data); // Affiche les données globales pour la première ville (ex: Nantes)
   } catch (error) {
     console.error("Erreur lors de la récupération des données météo :", error);
     alert("Impossible de récupérer la météo. Vérifiez votre connexion.");
@@ -110,47 +119,47 @@ async function getWeatherForCities(cities) {
 
 const weatherIcons = {
   "Ciel dégagé":
-    "https://lottie.host/b3b5ae08-5f3e-4094-ab58-f9612a687ac7/O8LhOt2dyT.lottie", // Soleil
+    "https://lottie.host/b3b5ae08-5f3e-4094-ab58-f9612a687ac7/O8LhOt2dyT.lottie",
   "Principalement dégagé":
-    "https://lottie.host/df7ee213-b80d-4cf3-94f4-1e91f15e9d2f/aXsV9VNWrm.lottie", // Soleil & nuages
+    "https://lottie.host/df7ee213-b80d-4cf3-94f4-1e91f15e9d2f/aXsV9VNWrm.lottie",
   "Partiellement nuageux":
-    "https://lottie.host/df7ee213-b80d-4cf3-94f4-1e91f15e9d2f/aXsV9VNWrm.lottie", // Soleil & nuages
+    "https://lottie.host/df7ee213-b80d-4cf3-94f4-1e91f15e9d2f/aXsV9VNWrm.lottie",
   Couvert:
-    "https://lottie.host/522351a4-39b0-46aa-82b5-29da2f0a8e2d/lrI1nvcZdv.lottie", // Nuages
+    "https://lottie.host/522351a4-39b0-46aa-82b5-29da2f0a8e2d/lrI1nvcZdv.lottie",
   Brouillard:
-    "https://lottie.host/dd6c14a7-9062-4561-8e27-111094a81883/drAH2y6hpD.lottie", // Brouillard
+    "https://lottie.host/dd6c14a7-9062-4561-8e27-111094a81883/drAH2y6hpD.lottie",
   "Brouillard givrant":
-    "https://lottie.host/e8f718db-3f4f-4b63-98ce-322a709e7578/vP1DhP1eT8.lottie", // Soleil & brouillard
+    "https://lottie.host/e8f718db-3f4f-4b63-98ce-322a709e7578/vP1DhP1eT8.lottie",
   "Bruine légère":
-    "https://lottie.host/3d813a49-7e5b-4ef7-9616-fb07c2735bc5/gMoKYuZNUJ.lottie", // Soleil & pluie
+    "https://lottie.host/3d813a49-7e5b-4ef7-9616-fb07c2735bc5/gMoKYuZNUJ.lottie",
   "Bruine modérée":
-    "https://lottie.host/3d813a49-7e5b-4ef7-9616-fb07c2735bc5/gMoKYuZNUJ.lottie", // Soleil & pluie
+    "https://lottie.host/3d813a49-7e5b-4ef7-9616-fb07c2735bc5/gMoKYuZNUJ.lottie",
   "Bruine forte":
-    "https://lottie.host/3d813a49-7e5b-4ef7-9616-fb07c2735bc5/gMoKYuZNUJ.lottie", // Soleil & pluie
+    "https://lottie.host/3d813a49-7e5b-4ef7-9616-fb07c2735bc5/gMoKYuZNUJ.lottie",
   "Pluie faible":
-    "https://lottie.host/3d813a49-7e5b-4ef7-9616-fb07c2735bc5/gMoKYuZNUJ.lottie", // Soleil & pluie
+    "https://lottie.host/3d813a49-7e5b-4ef7-9616-fb07c2735bc5/gMoKYuZNUJ.lottie",
   "Pluie modérée":
-    "https://lottie.host/3d813a49-7e5b-4ef7-9616-fb07c2735bc5/gMoKYuZNUJ.lottie", // Soleil & pluie
+    "https://lottie.host/3d813a49-7e5b-4ef7-9616-fb07c2735bc5/gMoKYuZNUJ.lottie",
   "Pluie forte":
-    "https://lottie.host/23163af9-92dc-4756-afdd-3fa300c34b2f/6I4HAiEMpU.lottie", // Orage pluvieux
+    "https://lottie.host/23163af9-92dc-4756-afdd-3fa300c34b2f/6I4HAiEMpU.lottie",
   "Neige faible":
-    "https://lottie.host/42816e51-8680-4266-88eb-268445961b2d/0UCBzJNKRw.lottie", // Neige
+    "https://lottie.host/42816e51-8680-4266-88eb-268445961b2d/0UCBzJNKRw.lottie",
   "Neige modérée":
-    "https://lottie.host/42816e51-8680-4266-88eb-268445961b2d/0UCBzJNKRw.lottie", // Neige
+    "https://lottie.host/42816e51-8680-4266-88eb-268445961b2d/0UCBzJNKRw.lottie",
   "Neige forte":
-    "https://lottie.host/42816e51-8680-4266-88eb-268445961b2d/0UCBzJNKRw.lottie", // Neige
+    "https://lottie.host/42816e51-8680-4266-88eb-268445961b2d/0UCBzJNKRw.lottie",
   "Averses légères":
-    "https://lottie.host/3d813a49-7e5b-4ef7-9616-fb07c2735bc5/gMoKYuZNUJ.lottie", // Soleil & pluie
+    "https://lottie.host/3d813a49-7e5b-4ef7-9616-fb07c2735bc5/gMoKYuZNUJ.lottie",
   "Averses modérées":
-    "https://lottie.host/3d813a49-7e5b-4ef7-9616-fb07c2735bc5/gMoKYuZNUJ.lottie", // Soleil & pluie
+    "https://lottie.host/3d813a49-7e5b-4ef7-9616-fb07c2735bc5/gMoKYuZNUJ.lottie",
   "Averses fortes":
-    "https://lottie.host/23163af9-92dc-4756-afdd-3fa300c34b2f/6I4HAiEMpU.lottie", // Orage pluvieux
+    "https://lottie.host/23163af9-92dc-4756-afdd-3fa300c34b2f/6I4HAiEMpU.lottie",
   Orages:
-    "https://lottie.host/316dc6f7-4377-471b-92b3-371490ff7d15/BNgEHOLSzg.lottie", // Orage
+    "https://lottie.host/316dc6f7-4377-471b-92b3-371490ff7d15/BNgEHOLSzg.lottie",
   "Orages avec grêle légère":
-    "https://lottie.host/dd39b0a1-7fdd-4dd8-9387-ef7d485a0427/fL8OIQVGOt.lottie", // Soleil orage & pluie
+    "https://lottie.host/dd39b0a1-7fdd-4dd8-9387-ef7d485a0427/fL8OIQVGOt.lottie",
   "Orages avec grêle forte":
-    "https://lottie.host/dd39b0a1-7fdd-4dd8-9387-ef7d485a0427/fL8OIQVGOt.lottie", // Soleil orage & pluie
+    "https://lottie.host/dd39b0a1-7fdd-4dd8-9387-ef7d485a0427/fL8OIQVGOt.lottie",
 };
 
 function getWeatherIcon(weatherCondition) {
@@ -163,6 +172,24 @@ function getWeatherIcon(weatherCondition) {
     iconSize: [40, 40],
     iconAnchor: [20, 20],
   });
+}
+
+// Nouvelle fonction pour afficher les heures de lever et coucher globales
+function displaySunTimes(data) {
+  const sunrise = data.daily?.sunrise?.[0]
+    ? new Date(data.daily.sunrise[0]).toLocaleTimeString("fr-FR")
+    : "Non disponible";
+  const sunset = data.daily?.sunset?.[0]
+    ? new Date(data.daily.sunset[0]).toLocaleTimeString("fr-FR")
+    : "Non disponible";
+
+  // Mise à jour des éléments HTML
+  const sunriseElement = document.getElementById("sunrise");
+  const sunsetElement = document.getElementById("sunset");
+  if (sunriseElement)
+    sunriseElement.textContent = `Lever du soleil : ${sunrise}`;
+  if (sunsetElement)
+    sunsetElement.textContent = `Coucher du soleil : ${sunset}`;
 }
 
 function displayWeather(results) {
@@ -202,18 +229,20 @@ function displayWeather(results) {
       weatherDescriptions[data.current_weather.weathercode] || "Inconnu";
     const humidity = data.hourly.relative_humidity_2m[11];
 
+    // Les données de sunrise/sunset ne sont plus dans les popups
     L.marker([city.lat, city.lon], {
       icon: getWeatherIcon(weatherCondition),
     }).addTo(map).bindPopup(`
-              <b>${city.name}</b><br>
-              🌡 Température: ${temperature} °C<br>
-              💨 Vent: ${windSpeed} km/h<br>
-              ☁️ Conditions: ${weatherCondition}<br>
-              💧 Humidité : ${humidity} %
-          `);
+      <b>${city.name}</b><br>
+      🌡 Température: ${temperature} °C<br>
+      💨 Vent: ${windSpeed} km/h<br>
+      ☁️ Conditions: ${weatherCondition}<br>
+      💧 Humidité : ${humidity} %
+    `);
   });
 }
-// Appel de la fonction pour récupérer la météo de toutes les villes
+// localStorage.clear();
+// Appel de la fonction
 getWeatherForCities(cities);
 
 // Ajuster la taille de la carte lors du redimensionnement de la fenêtre
