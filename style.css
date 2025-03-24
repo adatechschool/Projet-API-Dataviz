@@ -7,8 +7,9 @@ html, body {
 }
 
 body{
-  overflow:hidden; /*pour régler la taille de la fenetre sans scroll drt gch ou ht bas*/
+  overflow: hidden; /*pour régler la taille de la fenetre sans scroll drt gch ou ht bas*/
 }
+
 /* Style de l'en-tête : centré, avec un fond blanc et une bordure bleue en bas */
 #header {
   background: #fff;
