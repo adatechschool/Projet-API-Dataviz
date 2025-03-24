@@ -162,7 +162,7 @@ function getWeatherIcon(weatherCondition) {
     weatherIcons[weatherCondition] ||
     "https://lottie.host/79e439ba-40aa-449f-82fe-16f39f7808c2/wRg9H6cZdU.lottie";
   return L.divIcon({
-    html: `<dotlottie-player src="${lottieUrl}" background="transparent" speed="1" style="width: 50px; height: 50px" loop autoplay></dotlottie-player>`,
+    html: `<dotlottie-player src="${lottieUrl}" background="transparent" speed="1" style="width: 70px; height: 70px" loop autoplay></dotlottie-player>`,
     className: "custom-lottie-icon",
     iconSize: [40, 40],
     iconAnchor: [20, 20],
@@ -338,3 +338,29 @@ function displayTideData(data) {
   });
 }
 //fetchTideExtremes();
+
+// Ajout des tuiles OpenStreetMap
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution: "&copy; OpenStreetMap contributors",
+}).addTo(map);
+
+// Fonction pour styliser les départements
+function styleDepartement(feature) {
+  return {
+    color: "#3388FF", // Couleur de la bordure (bleu)
+    weight: 1, // Épaisseur de la bordure
+    fillColor: "#0096C7", // Couleur de remplissage (bleu)
+    fillOpacity: 0.7, // Opacité du remplissage (transparent)
+  };
+}
+
+// Fonction pour gérer le survol d'un département
+function highlightFeature(e) {
+  const layer = e.target;
+  layer.setStyle({
+    weight: 2,
+    color: "#666",
+    fillColor: "#0077B6", // Couleur de surbrillance
+    fillOpacity: 0.7,
+  });
+}
