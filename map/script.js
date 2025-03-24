@@ -136,3 +136,4 @@ chargerRegion();
 window.addEventListener("resize", () => {
   map.invalidateSize();
 });
+
