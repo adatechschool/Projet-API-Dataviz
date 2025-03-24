@@ -6,7 +6,7 @@ html, body {
   width: 100%;
 }
 body{
-  overflow: hidden; /*cache ce qui pourrait dépasser et donc on a une seule page, pas de déroulement ht bas et gch drt*/
+  overflow: hidden; /*cache ce qui pourrait dépasser et donc on a une seule page, pas de déroulement ht-bas et gch-drt*/
 }
 
 /* Style de l'en-tête : centré, avec un fond blanc et une bordure bleue en bas */
