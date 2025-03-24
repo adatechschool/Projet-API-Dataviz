@@ -380,23 +380,6 @@ async function ajouterDepartement(nomFichier) {
             offset: L.point(0, -10)
           });
         }
-        
-    //     // Définissez les limites du territoire continental de la région
-    //     // (Ajustez ces coordonnées selon votre région et vos besoins)
-    //     const continentBounds = L.latLngBounds([47.0, -2.5], [48.0, -0.5]);
-    //     // Dans onEachFeature, uniquement lier le tooltip si le centroïde du polygone est dans continentBounds
-    //     if (feature.properties && feature.properties.nom) {
-    //     // Récupérer le centroïde (centre) du calque correspondant à ce département
-    //     const center = layer.getBounds().getCenter();
-    //     // Vérifier si ce centre est dans le territoire continental
-    //     if (continentBounds.contains(center)) {
-    //       layer.bindTooltip(feature.properties.nom, {
-    //       permanent: false, // s'affiche uniquement au survol
-    //       direction: 'top', // positionne le tooltip au-dessus du curseur
-    //       offset: L.point(0, -10)
-    //     });
-    //   }
-    // }
 
         // Gestion des événements de survol et de clic
         layer.on({
