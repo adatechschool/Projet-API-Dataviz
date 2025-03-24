@@ -5,6 +5,9 @@ html, body {
   height: 100%;
   width: 100%;
 }
+body{
+  overflow: hidden; /*cache ce qui pourrait dépasser et donc on a une seule page, pas de déroulement ht bas et gch drt*/
+}
 
 /* Style de l'en-tête : centré, avec un fond blanc et une bordure bleue en bas */
 #header {
@@ -52,14 +55,8 @@ html, body {
   stroke: #3388FF;
   stroke-width: 1;
   transition: fill 0.3s;
-
-}
 }
 
-.departements path:hover {
-  fill: #00aaff; /* Couleur de surbrillance au survol */
-  cursor: pointer;
-}
 /*body {
   background-color: #87ceeb;
 }*/
