@@ -3,6 +3,7 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
+  width: 100%;
 }
 
 /* Style de l'en-tête : centré, avec un fond blanc et une bordure bleue en bas */
@@ -39,7 +40,6 @@ html, body {
 #map {
   width:auto;
   height: calc(100vh - 100px);/* Ajustez cette valeur selon la hauteur réelle de votre header */
-  border: solid black;
   position: relative;
   top: 0%;
   left: 0%;
@@ -58,9 +58,9 @@ html, body {
   fill: #00aaff; /* Couleur de surbrillance au survol */
   cursor: pointer;
 }
-body {
+/*body {
   background-color: #87ceeb;
-}
+}*/
 
 /*boutons*/
 
@@ -127,7 +127,7 @@ body {
     position: relative;
     margin: 20px 0 0 0;
     padding: 20px 0;
-    right: -4%;
+    right: -3.5%;
     /*width: var(--dropdown-width);
     left: 50%;
     margin-left: calc((var(--dropdown-width) / 2)  * -1);
@@ -160,7 +160,7 @@ body {
   }
 
   /* Dropdown triangle */
-  .dropdown ul::before {
+  /*.dropdown ul::before {
     content: ' ';
     position: absolute;
     width: 0;
@@ -171,4 +171,4 @@ body {
     border-style: solid;
     border-width: 0 10px 10px 10px;
     border-color: transparent transparent var(--dropdown-background) transparent;
-  }
+  }*/
