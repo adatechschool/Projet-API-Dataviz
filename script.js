@@ -162,7 +162,7 @@ function getWeatherIcon(weatherCondition) {
     weatherIcons[weatherCondition] ||
     "https://lottie.host/79e439ba-40aa-449f-82fe-16f39f7808c2/wRg9H6cZdU.lottie";
   return L.divIcon({
-    html: `<dotlottie-player src="${lottieUrl}" background="transparent" speed="1" style="width: 50px; height: 50px" loop autoplay></dotlottie-player>`,
+    html: `<dotlottie-player src="${lottieUrl}" background="transparent" speed="1" style="width: 70px; height: 70px" loop autoplay></dotlottie-player>`,
     className: "custom-lottie-icon",
     iconSize: [40, 40],
     iconAnchor: [20, 20],
