@@ -5,9 +5,8 @@ html, body {
   height: 100%;
   width: 100%;
 }
-
 body{
-  overflow: hidden;
+  overflow: hidden; /*cache ce qui pourrait dépasser et donc on a une seule page, pas de déroulement ht-bas et gch-drt*/
 }
 
 /* Style de l'en-tête : centré, avec un fond blanc et une bordure bleue en bas */
@@ -63,7 +62,7 @@ body{
   transition: fill 0.3s;
 }
 
-*body {
+/*body {
   background-color: #87ceeb;
 }*
 
