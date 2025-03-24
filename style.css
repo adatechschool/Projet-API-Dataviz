@@ -42,7 +42,12 @@ body{
    On retire la hauteur de l'en-tête pour que la carte occupe le reste de la fenêtre */
 #map {
   width:auto;
+  width:auto;
   height: calc(100vh - 100px);/* Ajustez cette valeur selon la hauteur réelle de votre header */
+  position: relative;
+  top: 0%;
+  left: 0%;
+  z-index: 1;
   position: relative;
   top: 0%;
   left: 0%;
@@ -59,7 +64,7 @@ body{
 
 /*body {
   background-color: #87ceeb;
-}*/
+}*
 
 /*boutons*/
 
@@ -117,7 +122,11 @@ body{
   .dropdown summary:focus a.button {
     border: 2px solid white;
   }
- 
+  
+  .dropdown summary:focus {
+    outline: none;
+  }
+  
   .dropdown ul {
     position: relative;
     margin: 20px 0 0 0;
