@@ -332,8 +332,8 @@ function styleDepartement(feature) {
   return {
     color: "#3388FF", // Couleur de la bordure (bleu)
     weight: 1, // Épaisseur de la bordure
-    fillColor: "#FFFFFF", // Couleur de remplissage (blanc)
-    fillOpacity: 0, // Opacité du remplissage (transparent)
+    fillColor: "#0096C7", // Couleur de remplissage (bleu)
+    fillOpacity: 0.7, // Opacité du remplissage (transparent)
   };
 }
 
@@ -343,7 +343,7 @@ function highlightFeature(e) {
   layer.setStyle({
     weight: 2,
     color: "#666",
-    fillColor: "#00aaff", // Couleur de surbrillance
+    fillColor: "#0077B6", // Couleur de surbrillance
     fillOpacity: 0.7,
   });
 }
@@ -371,6 +371,34 @@ async function ajouterDepartement(nomFichier) {
     L.geoJSON(data, {
       style: styleDepartement,
       onEachFeature: (feature, layer) => {
+        // Lier un tooltip affichant le nom du département
+        if (feature.properties && feature.properties.nom) {
+          layer.bindTooltip(feature.properties.nom, {
+            permanent: false, // s'affiche uniquement au survol
+            direction: 'top', // positionne le tooltip au-dessus du curseur
+            sticky: true, // le tooltip suit le curseur
+            offset: L.point(0, -10)
+          });
+        }
+        
+    //     // Définissez les limites du territoire continental de la région
+    //     // (Ajustez ces coordonnées selon votre région et vos besoins)
+    //     const continentBounds = L.latLngBounds([47.0, -2.5], [48.0, -0.5]);
+    //     // Dans onEachFeature, uniquement lier le tooltip si le centroïde du polygone est dans continentBounds
+    //     if (feature.properties && feature.properties.nom) {
+    //     // Récupérer le centroïde (centre) du calque correspondant à ce département
+    //     const center = layer.getBounds().getCenter();
+    //     // Vérifier si ce centre est dans le territoire continental
+    //     if (continentBounds.contains(center)) {
+    //       layer.bindTooltip(feature.properties.nom, {
+    //       permanent: false, // s'affiche uniquement au survol
+    //       direction: 'top', // positionne le tooltip au-dessus du curseur
+    //       offset: L.point(0, -10)
+    //     });
+    //   }
+    // }
+
+        // Gestion des événements de survol et de clic
         layer.on({
           mouseover: highlightFeature,
           mouseout: resetHighlight,
@@ -401,7 +429,7 @@ const maskLayer = L.mask(null, {
   restrictBounds: true, // Restreint la navigation aux limites du masque
   color: "#3388FF", // Couleur de la bordure (bleu)
   weight: 2, // Épaisseur de la bordure
-  fillColor: "#87CEEB", // Couleur de remplissage du masque (cachant l'extérieur)
+  fillColor: "#F6F6F6", // Couleur de remplissage du masque (cachant l'extérieur)
   fillOpacity: 1, // Opacité complète pour masquer l'extérieur
 });
 

@@ -48,8 +48,3 @@ html, body {
   stroke-width: 1;
   transition: fill 0.3s;
 }
-
-.departements path:hover {
-  fill: #00aaff; /* Couleur de surbrillance au survol */
-  cursor: pointer;
-}
