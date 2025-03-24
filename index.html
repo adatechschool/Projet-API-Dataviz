@@ -1,45 +1,59 @@
 <!DOCTYPE html>
 
 <html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
+    <title>Carte des Pays de la Loire - Masquage extérieur</title>
+    <!-- Lien vers le fichier CSS local et le CSS de Leaflet -->
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    />
+  </head>
 
-  <title>Carte des Pays de la Loire - Masquage extérieur</title>
-  <!-- Lien vers le fichier CSS local et le CSS de Leaflet -->
+  <body>
+    <!-- En-tête contenant les informations -->
+    <header id="header">
+      <h1>Bienvenue en Pays de La Loire</h1>
+      <div id="infos">
+        <div id="sunrise"></div>
+        <div id="sunset"></div>
+        <p id="date_heure"></p>
+      </div>
+    </header>
 
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <div id="conteneur">
+      <!-- Conteneur de la carte -->
+      <div id="map"></div>
+      </main>
 
-</head>
-
-<body>
-
-  <!-- En-tête contenant les informations -->
-  <header id="header">
-
-    <h1>Bienvenue en Pays de La Loire</h1>
-    <div id="infos">
-        <p id="date_heure">Nous sommes le jeudi 20 mars 2025 et il est 11:06:18</p>
-        <p id="horraire_du_soleil">Le soleil se lève à ? et se couche à ?</p>
-        </p>
+      <!--menu déroulant-->
+      <aside>
+        <details class="dropdown" id="maree">
+            <summary role="button">
+              <a class="button">Horaires des Marées</a>
+            </summary>
+              <ul>
+                <li><a href="#">Marée haute</a></li>
+                <li><a href="#">Marée basse</a></li>
+              </ul>
+        </details>
+      </aside>  
     </div>
-  </header>
-
-  <!-- Conteneur de la carte -->
-  <div id="map"></div>
-
-  <!-- Inclusion du JS de Leaflet -->
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-  <!-- Inclusion du plugin Leaflet.Mask (assurez-vous que le chemin est correct) -->
-  <script src="leaflet.mask.js"></script>
-  <!-- Inclusion du fichier JavaScript local -->
-  <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
-
-  <script src="script.js" defer></script>
-
-</body>
-
+    <!-- Inclusion du JS de Leaflet -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <!-- Inclusion du plugin Leaflet.Mask (assurez-vous que le chemin est correct) -->
+    <script src="leaflet.mask.js"></script>
+    <!-- Inclusion du fichier JavaScript local -->
+    <script
+      src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"
+      type="module"
+    ></script>
+    <script src="map/script.js"></script>
+    <script src="script.js" defer></script>
+  </body>
 </html>
