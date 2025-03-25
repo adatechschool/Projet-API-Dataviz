@@ -16,13 +16,13 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "&copy; OpenStreetMap contributors",
 }).addTo(map);
 
-// Fonction pour styliser les départements
+// Fonction pour styliser les départements (y compris couleur par défaut)
 function styleDepartement(feature) {
   return {
     color: "#3388FF", // Couleur de la bordure (bleu)
     weight: 1, // Épaisseur de la bordure
-    fillColor: "#FFFFFF", // Couleur de remplissage (blanc)
-    fillOpacity: 0, // Opacité du remplissage (transparent)
+    fillColor: "#0096C7", // Couleur de remplissage (bleu)
+    fillOpacity: 0.7, // Opacité du remplissage
   };
 }
 

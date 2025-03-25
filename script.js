@@ -24,6 +24,7 @@ const cities = [
   { name: "Les Sables-d'Olonne", lat: 46.5029, lon: -1.785493 },
   { name: "La Tranche-sur-mer", lat: 46.343, lon: -1.4391 },
   { name: "La Ferté-Bernard", lat: 48.188, lon: 0.647 },
+  { name: "Laval", lat: 48.0727, lon: -0.7723 },
 ];
 
 // Les marees
@@ -97,7 +98,7 @@ function updateDateTime() {
   // Mise à jour du DOM
   document.getElementById(
     "date_heure"
-  ).textContent = `Nous sommes le ${dateString} et il est ${timeString}`;
+  ).textContent = `\uD83D\uDCC5 Nous sommes le ${dateString} et il est ${timeString}`;
 }
 
 // Mettre à jour l'heure toutes les secondes
@@ -180,9 +181,9 @@ function displaySunTimes(data) {
   const sunriseElement = document.getElementById("sunrise");
   const sunsetElement = document.getElementById("sunset");
   if (sunriseElement)
-    sunriseElement.textContent = `Lever du soleil : ${sunrise}`;
+    sunriseElement.textContent = `\uD83C\uDF1E Lever du soleil : ${sunrise}`;
   if (sunsetElement)
-    sunsetElement.textContent = `Coucher du soleil : ${sunset}`;
+    sunsetElement.textContent = `\uD83C\uDF19 Coucher du soleil : ${sunset}`;
 }
 
 function displayWeather(results) {
@@ -301,26 +302,26 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "&copy; OpenStreetMap contributors",
 }).addTo(map);
 
-// Fonction pour styliser les départements
-function styleDepartement(feature) {
-  return {
-    color: "#3388FF", // Couleur de la bordure (bleu)
-    weight: 1, // Épaisseur de la bordure
-    fillColor: "#0096C7", // Couleur de remplissage (bleu)
-    fillOpacity: 0.7, // Opacité du remplissage (transparent)
-  };
-}
+// // Fonction pour styliser les départements
+// function styleDepartement(feature) {
+//   return {
+//     color: "#3388FF", // Couleur de la bordure (bleu)
+//     weight: 1, // Épaisseur de la bordure
+//     fillColor: "#0096C7", // Couleur de remplissage (bleu)
+//     fillOpacity: 0.7, // Opacité du remplissage (transparent)
+//   };
+// }
 
-// Fonction pour gérer le survol d'un département
-function highlightFeature(e) {
-  const layer = e.target;
-  layer.setStyle({
-    weight: 2,
-    color: "#666",
-    fillColor: "#0077B6", // Couleur de surbrillance
-    fillOpacity: 0.7,
-  });
-}
+// // Fonction pour gérer le survol d'un département
+// function highlightFeature(e) {
+//   const layer = e.target;
+//   layer.setStyle({
+//     weight: 2,
+//     color: "#666",
+//     fillColor: "#0077B6", // Couleur de surbrillance
+//     fillOpacity: 0.7,
+//   });
+// }
 
 function ajusterPositionSoleilLune() {
   const date = new Date();
