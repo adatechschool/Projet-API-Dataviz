@@ -222,6 +222,38 @@ body{
     color: var(--dropdown-background);
   }
 
+  .cercle {
+    width: 150px;
+    height: 150px;
+    border: 4px solid #333;
+    border-radius: 50%;
+    position: fixed;
+    margin: 50px auto;
+    left: 60px;;
+    background-color: #87CEEB;
+    z-index: 2;
+    overflow: hidden;
+  }
+  
+  .soleil, .lune {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: yellow;
+  }
+  
+  .lune {
+    background-color: #ffffff;
+  }
+  
+  .soleil, .lune {
+    top: 50%;
+    left: 50%;
+    transform-origin: 50% 50%;
+    transform: translate(-50%, -50%);
+  }  
+  
   /* Dropdown triangle */
   /*.dropdown ul::before {
     content: ' ';

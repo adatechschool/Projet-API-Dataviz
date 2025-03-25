@@ -322,6 +322,31 @@ function highlightFeature(e) {
   });
 }
 
+function ajusterPositionSoleilLune() {
+  const date = new Date();
+  const heures = date.getHours();
+  const minutes = date.getMinutes();
+
+  // Calcul de l'angle de 360° pour un cycle de 24 heures
+  // À midi, le soleil doit être en haut (0°)
+  const angle = ((heures + minutes / 60) / 24) * 180;
+
+  const soleil = document.querySelector(".soleil");
+  const lune = document.querySelector(".lune");
+
+  // Déplace le soleil sur un cercle de manière réaliste (midi = 0°)
+  soleil.style.transform = `translate(-50%, -50%) rotate(${angle}deg) translateX(-80px)`;
+
+  // Déplace la lune sur un cercle opposé (180° décalé)
+  lune.style.transform = `translate(-50%, -50%) rotate(${angle + 180}deg) translateX(-80px)`;
+}
+
+// Mettre à jour la position à chaque minute
+setInterval(ajusterPositionSoleilLune, 60000);
+
+// Initialiser la position au chargement
+ajusterPositionSoleilLune();
+
 // // Fonction pour réinitialiser le style d'un département
 // function resetHighlight(e) {
 //   e.target.setStyle(styleDepartement(e.target.feature));
