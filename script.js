@@ -97,7 +97,7 @@ function updateDateTime() {
   // Mise à jour du DOM
   document.getElementById(
     "date_heure"
-  ).textContent = `Nous sommes le ${dateString} et il est ${timeString}`;
+  ).textContent = `\uD83D\uDCC5 Nous sommes le ${dateString} et il est ${timeString}`;
 }
 
 // Mettre à jour l'heure toutes les secondes
@@ -180,9 +180,9 @@ function displaySunTimes(data) {
   const sunriseElement = document.getElementById("sunrise");
   const sunsetElement = document.getElementById("sunset");
   if (sunriseElement)
-    sunriseElement.textContent = `Lever du soleil : ${sunrise}`;
+    sunriseElement.textContent = `\uD83C\uDF1E Lever du soleil : ${sunrise}`;
   if (sunsetElement)
-    sunsetElement.textContent = `Coucher du soleil : ${sunset}`;
+    sunsetElement.textContent = `\uD83C\uDF19 Coucher du soleil : ${sunset}`;
 }
 
 function displayWeather(results) {

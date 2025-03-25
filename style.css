@@ -62,9 +62,10 @@ body{
     position: fixed;
     top: 101.5px;
     right: 0;
-    width: 36.8vw;
+    width: 38vw;
     height: 80px;
-    padding: 20px;
+    padding-top: 20px;
+    padding-bottom: 30px;
     padding-left: 30px;
     background-color: #f0f0f0;
     border: 1px solid #ccc;
