@@ -60,9 +60,9 @@ body{
 /* Encadré collé directement sous le header et au bord droit */
 #encadre {
     position: fixed;
-    top: 101.5px;
-    right: 0;
-    width: 38vw;
+    top: 123.5px;
+    right: 6.5vw;
+    width: 33vw;
     height: 80px;
     padding-top: 20px;
     padding-bottom: 30px;

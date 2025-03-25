@@ -24,6 +24,7 @@ const cities = [
   { name: "Les Sables-d'Olonne", lat: 46.5029, lon: -1.785493 },
   { name: "La Tranche-sur-mer", lat: 46.343, lon: -1.4391 },
   { name: "La Ferté-Bernard", lat: 48.188, lon: 0.647 },
+  { name: "Laval", lat: 48.0727, lon: -0.7723 },
 ];
 
 // Les marees
