@@ -78,16 +78,36 @@ body{
 
 /*boutons*/
 
-  aside {
+  #maree {
     width : auto;
     text-align: justify;
     margin: auto;
     position : relative; /*permet de placer le bouton où l'on souhaite*/
     top: -550px;
-    right: -70%;
+    right: -60%;
     z-index: 2; /* le bouton passe au dessus de la carte*/
   }
   
+  #pollens {
+    width : auto;
+    text-align: justify;
+    margin: auto;
+    position : relative; /*permet de placer le bouton où l'on souhaite*/
+    top: -500px;
+    right: -80%;
+    z-index: 2; /* le bouton passe au dessus de la carte*/
+  }
+
+  #air {
+    width : auto;
+    text-align: justify;
+    margin: auto;
+    position : relative; /*permet de placer le bouton où l'on souhaite*/
+    top: -450px;
+    right: -60%;
+    z-index: 2; /* le bouton passe au dessus de la carte*/
+  }
+
   a.button {
     /* Frame */
     display: inline-block;
