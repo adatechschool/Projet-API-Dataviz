@@ -28,10 +28,8 @@ const cities = [
 
 // Les marees
 const ville = [
-  { name: "Saint-Nazaire", lat: 47.27, lon: -2.2 },
-  { name: "Les Sables-d'Olonne", lat: 46.5, lon: -1.78 },
-  { name: "La Tranche-sur-mer", lat: 46.343, lon: -1.4391 },
-];
+  { name: "Les Sables-d'Olonne", lat: 46.5, lon: -1.78 }
+]
 
 // Affichage des pictogrammes sur la carte
 const weatherIcons = {
@@ -237,6 +235,7 @@ function displayWeather(results) {
   });
 }
 // localStorage.clear();
+
 // Appel de la fonction
 getWeatherForCities(cities);
 
@@ -245,99 +244,57 @@ window.addEventListener("resize", () => {
   map.invalidateSize();
 });
 
-// Affichage des marees
-async function fetchTideExtremes() {
-  const tideData = {};
+async function getMaree() {
+  const apiKey = "c88ca459-11c8-464d-8723-440c53dd35b7";
+  const lat = 46.4963; // Latitude des Sables-d'Olonne
+  const lon = -1.7831; // Longitude des Sables-d'Olonne
+  const url = `https://www.worldtides.info/api/v3?heights&lat=${lat}&lon=${lon}&length=86400&key=${apiKey}`;
 
-  if (isDataFresh()) {
-    console.log("Données déjà en cache");
-    const storedData = JSON.parse(localStorage.getItem("tideData"));
-    console.log("Données en cache:", storedData); // Debug
-    displayTideData(storedData);
-    return;
-  }
-
-  const now = new Date();
-  const start = now.toISOString().split(".")[0] + "Z";
-  const end =
-    new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000)
-      .toISOString()
-      .split(".")[0] + "Z";
-
-  for (const city of ville) {
-    const url = `https://api.stormglass.io/v2/tide/extremes/point?lat=${
-      city.lat
-    }&lng=${city.lon}&start=${encodeURIComponent(
-      start
-    )}&end=${encodeURIComponent(end)}`;
-    console.log(`Requête pour ${city.name}: ${url}`);
-
-    const response = await fetch(url, {
-      headers: {
-        Authorization:
-          "be092528-03fa-11f0-b8ac-0242ac130003-be0925aa-03fa-11f0-b8ac-0242ac130003",
-      },
-    });
-
-    if (!response.ok) {
-      console.error(
-        `Erreur HTTP pour ${city.name}: ${response.status} ${response.statusText}`
-      );
-      const errorData = await response.json();
-      console.error("Détails de l'erreur:", errorData);
-      continue;
-    }
-
-    const jsonData = await response.json();
-    if (!jsonData.data) {
-      console.error(
-        `Pas de 'data' dans la réponse pour ${city.name}:`,
-        jsonData
-      );
-      continue;
-    }
-
-    tideData[city.name] = jsonData.data.map((event) => ({
-      time: event.time,
-      height: event.height,
-      type: event.type,
-    }));
-  }
-
-  localStorage.setItem("tideData", JSON.stringify(tideData));
-  localStorage.setItem("lastUpdate", Date.now().toString());
-  displayTideData(tideData);
-}
-
-function isDataFresh() {
-  const lastUpdate = localStorage.getItem("lastUpdate");
-  if (!lastUpdate) return false;
+  const lastFetched = localStorage.getItem("lastFetched");
   const now = Date.now();
-  const oneWeek = 7 * 24 * 60 * 60 * 1000;
-  return now - parseInt(lastUpdate) < oneWeek;
-}
 
-function displayTideData(data) {
-  console.log("Données à afficher:", data); // Debug
-  affichageMarees.textContent = "";
+  if (lastFetched && now - lastFetched < 86400000) {
+      // Utilise les données stockées si elles sont encore valides
+      const storedData = JSON.parse(localStorage.getItem("mareeData"));
+      updateMareeUI(storedData);
+  } else {
+      try {
+          const response = await fetch(url);
+          const data = await response.json();
 
-  if (isDataFresh()) {
-    affichageMarees.textContent += "Données déjà en cache\n\n";
+          if (data.heights && data.heights.length > 0) {
+              let mareeHaute = "Non trouvé";
+              let mareeBasse = "Non trouvé";
+
+              // Trier les hauteurs pour trouver les plus hautes et plus basses
+              data.heights.sort((a, b) => b.height - a.height);
+              mareeHaute = new Date(data.heights[0].dt * 1000).toLocaleTimeString("fr-FR");
+              mareeBasse = new Date(data.heights[data.heights.length - 1].dt * 1000).toLocaleTimeString("fr-FR");
+
+              // Sauvegarder les données dans le localStorage
+              const mareeData = { mareeHaute, mareeBasse };
+              localStorage.setItem("mareeData", JSON.stringify(mareeData));
+              localStorage.setItem("lastFetched", now);
+
+              // Mettre à jour l'interface utilisateur avec les nouvelles données
+              updateMareeUI(mareeData);
+          } else {
+              console.error("Aucune donnée de marée trouvée.");
+          }
+      } catch (error) {
+          console.error("Erreur lors de la récupération des marées :", error);
+      }
   }
-
-  Object.keys(data).forEach((city) => {
-    affichageMarees.textContent += `${city}:\n`;
-    data[city].forEach((event) => {
-      const date = new Date(event.time);
-      const heightRounded = event.height.toFixed(2); // Erreur ici si height est undefined
-      affichageMarees.textContent += `Heure: ${date.toLocaleString()}, ${
-        event.type === "high" ? "Pleine mer" : "Basse mer"
-      }: ${heightRounded}m\n`;
-    });
-    affichageMarees.textContent += "\n";
-  });
 }
-//fetchTideExtremes();
+
+// Met à jour l'interface utilisateur avec les données de marée
+function updateMareeUI(data) {
+  document.getElementById("maree-haute").textContent = `Marée haute : ${data.mareeHaute}`;
+  document.getElementById("maree-basse").textContent = `Marée basse : ${data.mareeBasse}`;
+}
+
+// Exécuter la fonction au chargement
+document.addEventListener("DOMContentLoaded", getMaree);
 
 // Ajout des tuiles OpenStreetMap
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
