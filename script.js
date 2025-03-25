@@ -301,26 +301,26 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "&copy; OpenStreetMap contributors",
 }).addTo(map);
 
-// Fonction pour styliser les départements
-function styleDepartement(feature) {
-  return {
-    color: "#3388FF", // Couleur de la bordure (bleu)
-    weight: 1, // Épaisseur de la bordure
-    fillColor: "#0096C7", // Couleur de remplissage (bleu)
-    fillOpacity: 0.7, // Opacité du remplissage (transparent)
-  };
-}
+// // Fonction pour styliser les départements
+// function styleDepartement(feature) {
+//   return {
+//     color: "#3388FF", // Couleur de la bordure (bleu)
+//     weight: 1, // Épaisseur de la bordure
+//     fillColor: "#0096C7", // Couleur de remplissage (bleu)
+//     fillOpacity: 0.7, // Opacité du remplissage (transparent)
+//   };
+// }
 
-// Fonction pour gérer le survol d'un département
-function highlightFeature(e) {
-  const layer = e.target;
-  layer.setStyle({
-    weight: 2,
-    color: "#666",
-    fillColor: "#0077B6", // Couleur de surbrillance
-    fillOpacity: 0.7,
-  });
-}
+// // Fonction pour gérer le survol d'un département
+// function highlightFeature(e) {
+//   const layer = e.target;
+//   layer.setStyle({
+//     weight: 2,
+//     color: "#666",
+//     fillColor: "#0077B6", // Couleur de surbrillance
+//     fillOpacity: 0.7,
+//   });
+// }
 
 // // Fonction pour réinitialiser le style d'un département
 // function resetHighlight(e) {
