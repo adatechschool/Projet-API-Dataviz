@@ -10,6 +10,7 @@
 
 /* Réinitialisation des marges, paddings et hauteur */
 html, body {
+  background-color: #f6f8cc;
   margin: 0;
   padding: 0;
   height: 100%;
