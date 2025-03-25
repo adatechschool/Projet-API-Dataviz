@@ -60,17 +60,25 @@ async function ajouterDepartement(nomFichier) {
     L.geoJSON(data, {
       style: styleDepartement,
       onEachFeature: (feature, layer) => {
-        layer.on({
-          mouseover: highlightFeature,
-          mouseout: resetHighlight,
-          click: zoomToFeature,
-        });
-      },
-    }).addTo(map);
-  } catch (error) {
-    console.error(error);
+        // Lier un tooltip affichant le nom du département
+        if (feature.properties && feature.properties.nom) {
+          layer.bindTooltip(feature.properties.nom, {
+            permanent: false, // s'affiche uniquement au survol
+            direction: 'top', // positionne le tooltip au-dessus du curseur
+            sticky: true, // le tooltip suit le curseur
+            offset: L.point(0, -10)
+          })};
+          layer.on({
+            mouseover: highlightFeature,
+            mouseout: resetHighlight,
+            click: zoomToFeature,
+          });
+        },
+      }).addTo(map);
+    } catch (error) {
+      console.error(error);
+    }
   }
-}
 
 // Liste des fichiers GeoJSON des départements
 const departements = [
@@ -90,7 +98,7 @@ const maskLayer = L.mask(null, {
   restrictBounds: true, // Restreint la navigation aux limites du masque
   color: "#3388FF", // Couleur de la bordure (bleu)
   weight: 2, // Épaisseur de la bordure
-  fillColor: "#87CEEB", // Couleur de remplissage du masque (cachant l'extérieur)
+  fillColor: "#f6f8cc", // Couleur de remplissage du masque (cachant l'extérieur)
   fillOpacity: 1, // Opacité complète pour masquer l'extérieur
 });
 

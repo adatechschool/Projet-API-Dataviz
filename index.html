@@ -11,14 +11,15 @@
     <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" 
     />
+    
   </head>
 
   <body>
     <!-- En-tête contenant les informations -->
     <header id="header">
-      <h1>Bienvenue en Pays de La Loire</h1>
+      <h1>- Bienvenue en Pays de La Loire -</h1>
       <div id="infos">
         <div id="sunrise"></div>
         <div id="sunset"></div>
@@ -35,13 +36,31 @@
       <aside>
         <details class="dropdown" id="maree">
             <summary role="button">
-              <a class="button">Horaires des Marées</a>
+              <a class="button">HORAIRES DES MARÉES</a>
             </summary>
               <ul>
-                <li><a href="#">Marée haute</a></li>
-                <li><a href="#">Marée basse</a></li>
+                <li><a href="#">marée haute</a></li>
+                <li><a href="#">marée basse</a></li>
               </ul>
         </details>
+        <details class="dropdown" id="pollens">
+          <summary role="button">
+            <a class="button">ALERTE POLLENS</a>
+          </summary>
+            <ul>
+              <li><a href="#">pollen ?</a></li>
+              <li><a href="#">??</a></li>
+            </ul>
+      </details>
+      <details class="dropdown" id="air">
+        <summary role="button">
+          <a class="button">QUALITÉ DE L'AIR</a>
+        </summary>
+          <ul>
+            <li><a href="#">au secours c'est pollué</a></li>
+            <li><a href="#">on peut sortir</a></li>
+          </ul>
+    </details>
       </aside>  
     </div>
     <!-- Inclusion du JS de Leaflet -->

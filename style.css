@@ -1,3 +1,13 @@
+@font-face {
+  font-family: Weather sunday;
+  src: url(/font/Weather\ Sunday\ -\ Personal\ Use.otf);
+}
+@font-face {
+  font-family: Sunset trip;
+  src: url(/font/Sunset\ Trip.otf);
+
+}
+
 /* Réinitialisation des marges, paddings et hauteur */
 html, body {
   margin: 0;
@@ -5,9 +15,9 @@ html, body {
   height: 100%;
   width: 100%;
 }
-
 body{
-  overflow: hidden; /*pour régler la taille de la fenetre sans scroll drt gch ou ht bas*/
+  overflow: hidden; /*cache ce qui pourrait dépasser et donc on a une seule page, pas de déroulement ht-bas et gch-drt*/
+  background-color: #f6f8cc;
 }
 
 /* Style de l'en-tête : centré, avec un fond blanc et une bordure bleue en bas */
@@ -23,6 +33,8 @@ body{
 
 /* Style pour le titre de l'en-tête */
 #header h1 {
+  font-family: Weather sunday ;
+  font-size: 60px ;
   margin-top: 0; /* Pas de marge supérieure */
   margin-bottom: 10px; /* Marge inférieure de 10px */
 }
@@ -31,6 +43,7 @@ body{
 #header p {
   margin-top: 10px; /* Marge supérieure de 10px */
   margin-bottom: 10px; /* Pas de marge inférieure */
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #infos{
@@ -46,7 +59,8 @@ body{
   height: calc(100vh - 100px);/* Ajustez cette valeur selon la hauteur réelle de votre header */
   position: relative;
   top: 0%;
-  left: 0%;
+  left: -20%;
+  
   z-index: 1;
 }
 
@@ -58,26 +72,42 @@ body{
   transition: fill 0.3s;
 }
 
-.departements path:hover {
-  fill: #00aaff; /* Couleur de surbrillance au survol */
-  cursor: pointer;
-}
 /*body {
   background-color: #87ceeb;
-}*/
+}*
 
 /*boutons*/
 
-  aside {
+  #maree {
     width : auto;
     text-align: justify;
     margin: auto;
     position : relative; /*permet de placer le bouton où l'on souhaite*/
     top: -550px;
-    right: -85%;
+    right: -60%;
     z-index: 2; /* le bouton passe au dessus de la carte*/
   }
   
+  #pollens {
+    width : auto;
+    text-align: justify;
+    margin: auto;
+    position : relative; /*permet de placer le bouton où l'on souhaite*/
+    top: -500px;
+    right: -80%;
+    z-index: 2; /* le bouton passe au dessus de la carte*/
+  }
+
+  #air {
+    width : auto;
+    text-align: justify;
+    margin: auto;
+    position : relative; /*permet de placer le bouton où l'on souhaite*/
+    top: -450px;
+    right: -60%;
+    z-index: 2; /* le bouton passe au dessus de la carte*/
+  }
+
   a.button {
     /* Frame */
     display: inline-block;
@@ -86,10 +116,11 @@ body{
     box-sizing: border-box;
     
     /* Style */
+    font-family: Sunset trip;
     border: none;
-    /*background: var(--button-background);
-    color: var(--button-color);*/
-    font-size: 18px;
+    background: #0096C7;
+    /*color: var(--button-color);*/
+    font-size: 22px;
     cursor: pointer;
   }
 
@@ -115,10 +146,6 @@ body{
     display: none;
   }
   
-  .dropdown summary:focus {
-    outline: none;
-  }
-  
   .dropdown summary:focus a.button {
     border: 2px solid white;
   }
@@ -140,7 +167,9 @@ body{
     
     background: var(--dropdown-background);
     border-radius: 6px;
-    list-style: none;
+    /*list-style: none;*/
+    font-family: Sunset trip;
+    font-size: 20px;
   }
 
   .dropdown ul li {
@@ -176,3 +205,4 @@ body{
     border-width: 0 10px 10px 10px;
     border-color: transparent transparent var(--dropdown-background) transparent;
   }*/
+  
