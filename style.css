@@ -15,7 +15,6 @@ html, body {
   padding: 0;
   height: 100%;
   width: 100%;
-  box-sizing: border-box;
 }
 
 body{
@@ -45,12 +44,6 @@ body{
   margin-bottom: 0; /* Pas de marge inférieure */
 }
 
-/* Style pour les paragraphes de l'en-tête */
-#header p {
-  margin-top: 10px; /* Marge supérieure de 10px */
-  margin-bottom: 10px; /* Pas de marge inférieure */
-}
-
 /* Encadré collé directement sous le header et au bord droit */
 #encadre {
     position: fixed;
@@ -64,10 +57,7 @@ body{
     background-color: #f0f0f0;
     border: 1px solid #ccc;
     z-index: 3;           /* S'assurer que l'encadré reste visible au-dessus */
-    border-top-left-radius: 50px;
-    border-bottom-left-radius: 50px;
-    border-top-right-radius: 50px;
-    border-bottom-right-radius: 50px;
+   border-radius: 50px;
     font-family: 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
 }
 
@@ -179,11 +169,6 @@ body{
     box-sizing: border-box;
     color:black;
     text-decoration: none;
-  }
-
-  .dropdown ul li a:hover {
-    background-color: var(--dropdown-highlight);
-    color: var(--dropdown-background);
   }
 
   .cercle {

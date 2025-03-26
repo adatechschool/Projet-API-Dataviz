@@ -1,7 +1,6 @@
 // Initialisation de la carte centrée sur la région des Pays de la Loire
 const map = L.map("map", { zoom: 8, minZoom: 8, maxZoom: 8 }).setView(
   [42.3, -0.8],
-  8
 );
 
 map.dragging.disable();
@@ -66,7 +65,6 @@ async function ajouterDepartement(nomFichier) {
           layer.on({
             mouseover: highlightFeature,
             mouseout: resetHighlight,
-            click: zoomToFeature,
           });
         },
       }).addTo(map);

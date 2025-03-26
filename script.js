@@ -1,8 +1,3 @@
-const meteo = document.getElementById("meteo_container");
-const vent = document.getElementById("wind");
-const conditions = document.getElementById("conditions_meteo");
-const temp = document.getElementById("temperature");
-
 // Liste des villes avec leurs coordonnées
 const cities = [
   { name: "Nantes", lat: 47.2173, lon: -1.5534 },
@@ -206,17 +201,12 @@ function displayWeather(results) {
     99: "Orages avec grêle forte",
   };
 
-  const meteoContainer = document.getElementById("meteo_container");
-  if (meteoContainer) {
-    meteoContainer.innerHTML = "";
-  }
-
   results.forEach(({ city, data }) => {
     const temperature = data.current_weather.temperature;
     const windSpeed = data.current_weather.windspeed;
     const weatherCondition =
       weatherDescriptions[data.current_weather.weathercode] || "Inconnu";
-    const humidity = data.hourly.relative_humidity_2m[11];
+    const humidity = data.hourly.relative_humidity_2m[12];
 
     // Les données de sunrise/sunset ne sont plus dans les popups
     L.marker([city.lat, city.lon], {
@@ -234,11 +224,6 @@ function displayWeather(results) {
 
 // Appel de la fonction
 getWeatherForCities(cities);
-
-// Ajuster la taille de la carte lors du redimensionnement de la fenêtre
-window.addEventListener("resize", () => {
-  map.invalidateSize();
-});
 
 async function getMaree() {
   const apiKey = "c88ca459-11c8-464d-8723-440c53dd35b7";
