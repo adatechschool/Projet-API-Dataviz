@@ -3,17 +3,12 @@ const map = L.map("map", { zoom: 8, minZoom: 8, maxZoom: 8 }).setView(
   [42.3, -0.8],
   8
 );
-map.zoomControl.remove();
 
 map.dragging.disable();
 
 // Ajouter le fond de carte OpenStreetMap
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "© OpenStreetMap contributors",
-}).addTo(map);
-
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  attribution: "&copy; OpenStreetMap contributors",
 }).addTo(map);
 
 // Fonction pour styliser les départements (y compris couleur par défaut)

@@ -32,7 +32,8 @@ body{
   padding-bottom: 10px;
   border-bottom: 2px solid #3388FF; /* Bordure bleue */
   position: relative;
-  background-image: url('paysage.jpeg');
+  background-image: url('coteAtlantique.jpg');
+  background-position: center 20%;
   overflow: hidden; /* Masque le contenu dépassant la hauteur définie */
 }
 
@@ -53,7 +54,7 @@ body{
 /* Encadré collé directement sous le header et au bord droit */
 #encadre {
     position: fixed;
-    top: 123.5px;
+    top: 135px;
     right: 6.5vw;
     width: 33vw;
     height: 80px;
@@ -106,22 +107,22 @@ body{
     z-index: 2; /* le bouton passe au dessus de la carte*/
   }
   
+  #UV {
+    width : auto;
+    text-align: justify;
+    margin: auto;
+    position : relative; /*permet de placer le bouton où l'on souhaite*/
+    top: -550px;
+    right: -80%;
+    z-index: 2; /* le bouton passe au dessus de la carte*/
+  }
+
   #pollens {
     width : auto;
     text-align: justify;
     margin: auto;
     position : relative; /*permet de placer le bouton où l'on souhaite*/
-    top: -480px;
-    right: -80%;
-    z-index: 2; /* le bouton passe au dessus de la carte*/
-  }
-
-  #air {
-    width : auto;
-    text-align: justify;
-    margin: auto;
-    position : relative; /*permet de placer le bouton où l'on souhaite*/
-    top: -450px;
+    top: -350px;
     right: -60%;
     z-index: 2; /* le bouton passe au dessus de la carte*/
   }
