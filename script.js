@@ -292,11 +292,6 @@ function updateMareeUI(data) {
 // Exécuter la fonction au chargement
 document.addEventListener("DOMContentLoaded", getMaree);
 
-// Ajout des tuiles OpenStreetMap
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  attribution: "&copy; OpenStreetMap contributors",
-}).addTo(map);
-
 function ajusterPositionSoleilLune() {
   const date = new Date();
   const heures = date.getHours();
