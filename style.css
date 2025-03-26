@@ -49,7 +49,6 @@ body{
 #header p {
   margin-top: 10px; /* Marge supérieure de 10px */
   margin-bottom: 10px; /* Pas de marge inférieure */
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Encadré collé directement sous le header et au bord droit */
@@ -69,6 +68,7 @@ body{
     border-bottom-left-radius: 50px;
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;
+    font-family: 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
 }
 
 /* Affichage vertical des éléments dans l'encadré */
