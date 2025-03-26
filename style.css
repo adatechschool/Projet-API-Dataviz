@@ -10,25 +10,34 @@
 
 /* Réinitialisation des marges, paddings et hauteur */
 html, body {
+  background-color: #f6f8cc;
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
+  box-sizing: border-box;
 }
+
 body{
   overflow: hidden; /*cache ce qui pourrait dépasser et donc on a une seule page, pas de déroulement ht-bas et gch-drt*/
   background-color: #f6f8cc;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  
 }
 
 /* Style de l'en-tête : centré, avec un fond blanc et une bordure bleue en bas */
 #header {
   background: #fff;
   text-align: center;
+  height: 80px; /* Définissez la hauteur souhaitée */
   padding-top: 10px;
   padding-bottom: 10px;
   border-bottom: 2px solid #3388FF; /* Bordure bleue */
   position: relative;
   background-image: url('paysage.jpeg');
+  overflow: hidden; /* Masque le contenu dépassant la hauteur définie */
 }
 
 /* Style pour le titre de l'en-tête */
@@ -36,7 +45,7 @@ body{
   font-family: Weather sunday ;
   font-size: 60px ;
   margin-top: 0; /* Pas de marge supérieure */
-  margin-bottom: 10px; /* Marge inférieure de 10px */
+  margin-bottom: 0; /* Pas de marge inférieure */
 }
 
 /* Style pour les paragraphes de l'en-tête */
@@ -46,12 +55,32 @@ body{
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-#infos{
-  display: flex;
-  flex-direction: row;
-  justify-content : space-around;
-  align-items: center;
+/* Encadré collé directement sous le header et au bord droit */
+#encadre {
+    position: fixed;
+    top: 123.5px;
+    right: 6.5vw;
+    width: 33vw;
+    height: 80px;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    z-index: 3;           /* S'assurer que l'encadré reste visible au-dessus */
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
 }
+
+/* Affichage vertical des éléments dans l'encadré */
+#encadre > div,
+#encadre > p {
+  display: block;
+  margin-bottom: 10px;
+}
+
 /* Style du conteneur de la carte.
    On retire la hauteur de l'en-tête pour que la carte occupe le reste de la fenêtre */
 #map {
@@ -60,7 +89,6 @@ body{
   position: relative;
   top: 0%;
   left: -20%;
-  
   z-index: 1;
 }
 
@@ -72,34 +100,28 @@ body{
   transition: fill 0.3s;
 }
 
-/*body {
-  background-color: #87ceeb;
-}*
-
-/*boutons*/
-
   #maree {
-    width : auto;
+   /* width : auto;*/
     text-align: justify;
     margin: auto;
     position : relative; /*permet de placer le bouton où l'on souhaite*/
-    top: -550px;
+    top: -530px;
     right: -60%;
     z-index: 2; /* le bouton passe au dessus de la carte*/
   }
   
   #pollens {
-    width : auto;
+    /* width : auto;*/
     text-align: justify;
     margin: auto;
     position : relative; /*permet de placer le bouton où l'on souhaite*/
-    top: -500px;
+    top: -480px;
     right: -80%;
     z-index: 2; /* le bouton passe au dessus de la carte*/
   }
 
   #air {
-    width : auto;
+    /* width : auto;*/
     text-align: justify;
     margin: auto;
     position : relative; /*permet de placer le bouton où l'on souhaite*/
@@ -109,17 +131,13 @@ body{
   }
 
   a.button {
-    /* Frame */
     display: inline-block;
     padding: 20px 30px;
     border-radius: 50px;
     box-sizing: border-box;
-    
-    /* Style */
     font-family: Sunset trip;
-    border: none;
+    border: solid white;
     background: #0096C7;
-    /*color: var(--button-color);*/
     font-size: 22px;
     cursor: pointer;
   }
@@ -130,16 +148,12 @@ body{
   
   /* Dropdown styles */
   .dropdown {
-    /*position: relative;*/
-    padding: 2;
+    position: relative;
     margin-right: 1em;
-    
-    border: none;
   }
 
   .dropdown summary {
     list-style: none;
-    list-style-type: none;
   }
   
   .dropdown > summary::-webkit-details-marker {
@@ -149,32 +163,16 @@ body{
   .dropdown summary:focus a.button {
     border: 2px solid white;
   }
-  
-  .dropdown summary:focus {
-    outline: none;
-  }
-  
+
   .dropdown ul {
     position: relative;
     margin: 20px 0 0 0;
     padding: 20px 0;
-    right: -3.5%;
-    /*width: var(--dropdown-width);
-    left: 50%;
-    margin-left: calc((var(--dropdown-width) / 2)  * -1);
-    box-sizing: border-box;*/
+    right: -2.5%;
     z-index: 3;
-    
-    background: var(--dropdown-background);
     border-radius: 6px;
-    /*list-style: none;*/
     font-family: Sunset trip;
     font-size: 20px;
-  }
-
-  .dropdown ul li {
-    padding: 0;
-    margin: 0;
   }
 
   .dropdown ul li a:link, .dropdown ul li a:visited {
@@ -182,8 +180,7 @@ body{
     padding: 10px 0.8rem;
     width: 100%;
     box-sizing: border-box;
-    
-    color: var(--dropdown-color);
+    color:black;
     text-decoration: none;
   }
 
@@ -192,17 +189,34 @@ body{
     color: var(--dropdown-background);
   }
 
-  /* Dropdown triangle */
-  /*.dropdown ul::before {
-    content: ' ';
-    position: absolute;
-    width: 0;
-    height: 0;
-    top: -10px;
-    left: 50%;
-    margin-left: -10px;
-    border-style: solid;
-    border-width: 0 10px 10px 10px;
-    border-color: transparent transparent var(--dropdown-background) transparent;
-  }*/
+  .cercle {
+    width: 150px;
+    height: 150px;
+    border: 4px solid #333;
+    border-radius: 50%;
+    position: fixed;
+    margin: 50px auto;
+    left: 60px;;
+    background-color: #87CEEB;
+    z-index: 2;
+    overflow: hidden;
+  }
   
+  .soleil, .lune {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: yellow;
+  }
+  
+  .lune {
+    background-color: #ffffff;
+  }
+  
+  .soleil, .lune {
+    top: 50%;
+    left: 50%;
+    transform-origin: 50% 50%;
+    transform: translate(-50%, -50%);
+  }  
