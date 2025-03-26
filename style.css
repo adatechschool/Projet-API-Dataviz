@@ -106,22 +106,22 @@ body{
     z-index: 2; /* le bouton passe au dessus de la carte*/
   }
   
+  #UV {
+    width : auto;
+    text-align: justify;
+    margin: auto;
+    position : relative; /*permet de placer le bouton où l'on souhaite*/
+    top: -550px;
+    right: -80%;
+    z-index: 2; /* le bouton passe au dessus de la carte*/
+  }
+
   #pollens {
     width : auto;
     text-align: justify;
     margin: auto;
     position : relative; /*permet de placer le bouton où l'on souhaite*/
-    top: -480px;
-    right: -80%;
-    z-index: 2; /* le bouton passe au dessus de la carte*/
-  }
-
-  #air {
-    width : auto;
-    text-align: justify;
-    margin: auto;
-    position : relative; /*permet de placer le bouton où l'on souhaite*/
-    top: -450px;
+    top: -350px;
     right: -60%;
     z-index: 2; /* le bouton passe au dessus de la carte*/
   }
