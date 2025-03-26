@@ -122,7 +122,7 @@ body{
     text-align: justify;
     margin: auto;
     position : relative; /*permet de placer le bouton où l'on souhaite*/
-    top: -350px;
+    top: -550px;
     right: -60%;
     z-index: 2; /* le bouton passe au dessus de la carte*/
   }
