@@ -27,11 +27,6 @@ const cities = [
   { name: "Laval", lat: 48.0727, lon: -0.7723 },
 ];
 
-// Les marees
-const ville = [
-  { name: "Les Sables-d'Olonne", lat: 46.5, lon: -1.78 }
-]
-
 // Affichage des pictogrammes sur la carte
 const weatherIcons = {
   "Ciel dégagé":
@@ -235,7 +230,7 @@ function displayWeather(results) {
     `);
   });
 }
-// localStorage.clear();
+//localStorage.clear();
 
 // Appel de la fonction
 getWeatherForCities(cities);
@@ -321,3 +316,75 @@ setInterval(ajusterPositionSoleilLune, 60000);
 
 // Initialiser la position au chargement
 ajusterPositionSoleilLune();
+
+const apiKey = "46445dfeeaffcd2e2d7540367e8728de"; // Remplace par ta clé API OpenWeatherMap
+const villes = [
+  { nom: "Nantes", latitude: 47.2173, longitude: -1.5534 },
+  { nom: "Angers", latitude: 47.4698, longitude: -0.5593 },
+  { nom: "Le Mans", latitude: 48.0667, longitude: 0.2 },
+  { nom: "La Roche-sur-Yon", latitude: 46.6667, longitude: -1.4333 },
+  { nom: "Saint-Nazaire", latitude: 47.0727, longitude: -2.7723 }
+];
+
+// Fonction pour récupérer les indices UV
+async function getUvData() {
+  console.log("Récupération des données UV...");
+  const uvData = {};
+
+  for (const ville of villes) {
+    const url = `https://api.openweathermap.org/data/2.5/uvi?lat=${ville.latitude}&lon=${ville.longitude}&appid=${apiKey}`;
+    console.log(`URL pour ${ville.nom}:`, url);  // Afficher l'URL de la requête
+
+    try {
+      const response = await fetch(url);
+      
+      // Vérifier si la réponse est correcte
+      if (!response.ok) {
+        throw new Error(`Erreur HTTP: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      console.log(`Données reçues pour ${ville.nom}:`, data);  // Afficher les données brutes
+
+      // Vérifier si l'index UV est bien défini
+      uvData[ville.nom] = data.value ?? "Données indisponibles";
+
+    } catch (error) {
+      console.error(`Erreur pour ${ville.nom}:`, error);  // Afficher l'erreur détaillée
+      uvData[ville.nom] = "Erreur de chargement";
+    }
+  }
+
+  // Stocker les données UV dans localStorage
+  localStorage.setItem("uvData", JSON.stringify(uvData));
+
+  // Afficher les indices UV
+  displayUvInMenu(uvData);
+}
+
+// Fonction pour afficher les UV dans un menu
+function displayUvInMenu(uvData) {
+  const menu = document.getElementById("uvMenu");
+  menu.innerHTML = ""; // Vide le menu avant d'ajouter les nouvelles valeurs
+
+  for (const [ville, uv] of Object.entries(uvData)) {
+    const li = document.createElement("li");
+    li.textContent = `${ville}: ${uv}`;
+    menu.appendChild(li);
+  }
+}
+
+// Charger les données UV au démarrage
+function loadUvFromStorage() {
+  console.log("Chargement des données UV depuis localStorage...");
+  const uvData = JSON.parse(localStorage.getItem("uvData"));
+
+  if (uvData) {
+    displayUvInMenu(uvData);
+  } else {
+    getUvData();
+  }
+}
+
+// Exécuter au chargement de la page
+window.onload = loadUvFromStorage;
