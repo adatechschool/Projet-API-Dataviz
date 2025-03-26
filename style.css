@@ -32,7 +32,8 @@ body{
   padding-bottom: 10px;
   border-bottom: 2px solid #3388FF; /* Bordure bleue */
   position: relative;
-  background-image: url('paysage.jpeg');
+  background-image: url('coteAtlantique.jpg');
+  background-position: center 20%;
   overflow: hidden; /* Masque le contenu dépassant la hauteur définie */
 }
 
@@ -54,7 +55,7 @@ body{
 /* Encadré collé directement sous le header et au bord droit */
 #encadre {
     position: fixed;
-    top: 123.5px;
+    top: 135px;
     right: 6.5vw;
     width: 33vw;
     height: 80px;
